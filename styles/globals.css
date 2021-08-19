@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 html,
 body {
   padding: 0;
@@ -13,4 +16,67 @@ a {
 
 * {
   box-sizing: border-box;
+}
+.display_none {
+  display: none;
+  /* background-color: yellow; */
+}
+.required {
+  color: red;
+  font-size: 12px;
+}
+.upper-lower {
+  border: 1px solid lightgray;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+.active {
+  background-color: #db2777;
+  color: white;
+}
+.bottom-full {
+  bottom: 100%;
+}
+.top-full {
+  top: 100%;
+}
+.tooltip {
+  transform: translateX(50%);
+  right: 50%;
+  z-index: 10000;
+}
+.avail0 {
+  /* //not available */
+  background-color: grey;
+  border-color: grey;
+}
+.avail1 {
+  /* // available for all */
+  background-color: white;
+  border-color: grey;
+}
+.avail2 {
+  /* //available only for male */
+  background-color: white;
+  border-color: #2196f3;
+}
+.avail3 {
+  /* //available only for female */
+  background-color: white;
+  border-color: #db2777;
+}
+.avail-2 {
+  /* //booked by male */
+  background-color: grey;
+  border-color: #2196f3;
+}
+.avail-3 {
+  /* //booked by female */
+  background-color: grey;
+  border-color: #db2777;
+}
+.selected,
+.selectedSeat {
+  background-color: #008000;
+  border-color: #008000;
 }
