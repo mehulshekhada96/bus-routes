@@ -13,7 +13,7 @@ export default function ChartLayout({
   const seatHandler = async (e) => {
     e.preventDefault();
 
-    const seqNo = e.target.innerText;
+    const seqNo = e.target.getAttribute('seqno');
     const price = e.target.getAttribute('price');
     !totalSelected.includes(seqNo)
       ? totalSelected.length >= 6
@@ -25,44 +25,6 @@ export default function ChartLayout({
         setTotalPrice(totalPrice - Number(price))
       : null;
     setTotalSelected(totalSelected);
-    await getHoldId();
-  };
-
-  const getHoldId = () => {
-    fetch('http://api.iamgds.com/ota/HoldSeats', {
-      method: 'post',
-      headers: {
-        'access-token': process.env.accessToken,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        FromCityId: 4292,
-        ToCityId: 4562,
-        JourneyDate: '2021-08-21',
-        BusId: 51,
-        PickUpID: '44953',
-        DropOffID: '750',
-        ContactInfo: {
-          CustomerName: 'test',
-          Email: 'testbooking@travelyaari.com',
-          Phone: '9090909090',
-          Mobile: '9090909090',
-        },
-        Passengers: [
-          {
-            Name: 'test',
-            Age: 25,
-            Gender: 'M',
-            SeatNo: '8',
-            Fare: 13,
-            SeatTypeId: 1,
-            IsAcSeat: false,
-          },
-        ],
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => console.log(result));
   };
 
   const lowerSeats = data.ChartLayout.Layout.Lower.map((seat, index) => (
@@ -151,7 +113,7 @@ export function Chart({ seat, data, berthType, seatHandler, totalSelected }) {
   const zIndex = berthType === 'Lower' ? 'z-10' : 'z-50';
   const greenClass =
     totalSelected && totalSelected.length > 0
-      ? totalSelected.includes(data.ChartSeats.Seats[seat[0]])
+      ? totalSelected.includes(`${seat[0]}`)
         ? 'selected'
         : null
       : null;
@@ -166,7 +128,7 @@ export function Chart({ seat, data, berthType, seatHandler, totalSelected }) {
       <div
         onMouseEnter={showDetails}
         onMouseLeave={hideDetails}
-        onClick={data.SeatsStatus.Status[seat[0]] === 1 ? seatHandler : null}
+        onClick={data.SeatsStatus.Status[seat[0]] >= 1 ? seatHandler : null}
         className={`cursor-pointer w-${8 * seat[3]} h-${8 * seat[4]} avail${
           data.SeatsStatus.Status[seat[0]]
         } border-2  text-center ${zIndex} ${greenClass} `}

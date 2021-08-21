@@ -11,6 +11,14 @@ export default function SeatSelection({
   totalSelected,
   setTotalPrice,
   setTotalSelected,
+  SetShowUserDatails,
+  showUserDetails,
+  setSelectedSeqNo,
+  selectedSeqNo,
+  setPickupId,
+  PickupId,
+  DropOffID,
+  setDropOffID,
 }) {
   return (
     <>
@@ -21,14 +29,29 @@ export default function SeatSelection({
           setTotalSelected={setTotalSelected}
           totalPrice={totalPrice}
           setTotalPrice={setTotalPrice}
+          selectedSeqNo={selectedSeqNo}
+          setSelectedSeqNo={setSelectedSeqNo}
         />
         <div>
-          <PickupAndDrop bus={bus} />
-          {totalSelected.length > 0 ? (
-            <TotalFare totalSelected={totalSelected} price={totalPrice} />
+          <PickupAndDrop
+            bus={bus}
+            setPickupId={setPickupId}
+            setDropOffID={setDropOffID}
+          />
+          {!PickupId || !DropOffID ? (
+            <p className="required">*Pickup or DropOff is Missing </p>
+          ) : totalSelected.length > 0 ? (
+            <TotalFare
+              totalSelected={totalSelected}
+              price={totalPrice}
+              SetShowUserDatails={SetShowUserDatails}
+              showUserDetails={showUserDetails}
+              seatData={seatData}
+            />
           ) : (
             <p className="required">*Select Seat First</p>
           )}
+          {totalSelected.length <= 0 ? SetShowUserDatails(false) : null}
         </div>
         <JourneyInfo bus={bus} />
       </div>

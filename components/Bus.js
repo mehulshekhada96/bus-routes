@@ -1,10 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SeatSelection from './SeatSelection';
+import UserDetails from './UserDetails';
 export default function Buses({ bus, startDate, fromCity, toCity }) {
   const [showSeats, setShowSeats] = useState(false);
   const [seatData, setSeatdata] = useState();
+
   const [totalSelected, setTotalSelected] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [showUserDetails, SetShowUserDatails] = useState(false);
+  const [PickupId, setPickupId] = useState();
+  const [DropOffID, setDropOffID] = useState();
+
+  useEffect(() => {
+    setSeatdata();
+    setShowSeats(false);
+    setTotalSelected([]);
+    setTotalPrice(0);
+    SetShowUserDatails(false);
+    setPickupId();
+    setDropOffID();
+    console.log('seatData');
+  }, [bus]);
+
   const handleClick = (e) => {
     e.preventDefault();
     setShowSeats(!showSeats);
@@ -70,8 +87,31 @@ export default function Buses({ bus, startDate, fromCity, toCity }) {
             totalSelected={totalSelected}
             setTotalPrice={setTotalPrice}
             setTotalSelected={setTotalSelected}
+            SetShowUserDatails={SetShowUserDatails}
+            showUserDetails={showUserDetails}
+            PickupId={PickupId}
+            DropOffID={DropOffID}
+            setPickupId={setPickupId}
+            setDropOffID={setDropOffID}
           />
         </div>
+      ) : null}
+      {showUserDetails ? (
+        <UserDetails
+          bus={bus}
+          fromCity={fromCity}
+          PickupId={PickupId}
+          DropOffID={DropOffID}
+          toCity={toCity}
+          startDate={startDate}
+          seatData={seatData}
+          totalPrice={totalPrice}
+          totalSelected={totalSelected}
+          setTotalPrice={setTotalPrice}
+          setTotalSelected={setTotalSelected}
+          SetShowUserDatails={SetShowUserDatails}
+          showUserDetails={showUserDetails}
+        />
       ) : null}
     </>
   );

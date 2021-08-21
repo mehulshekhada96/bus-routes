@@ -2,7 +2,7 @@ import Head from 'next/head';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Buses from '../components/Bus';
-import Layout from '../components/Layout';
+
 export default function Home({ cityData }) {
   const [fromCity, setFromCity] = useState();
   const [fromCityName, setFromCityName] = useState();
