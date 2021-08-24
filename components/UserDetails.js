@@ -10,7 +10,7 @@ export default function UserDetails({
   toCity,
   startDate,
   seatData,
-  totalPrice,
+  setHoldData,
   totalSelected,
 }) {
   const [ContactInfo, setContactInfo] = useState({});
@@ -49,6 +49,9 @@ export default function UserDetails({
         console.log(result);
         if (result.success === false) {
           alert(result.Error.Msg);
+        }
+        if (result.success) {
+          setHoldData(result.data);
         }
       })
       .catch((err) => console.log(err));
@@ -174,7 +177,7 @@ export default function UserDetails({
           {PassengerList}
         </div>
         <button
-          className="inline-flex w-12 justify-center py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 active"
+          className="inline-flex w-20 justify-center py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 active"
           onClick={handleConfirm}
         >
           Confirm

@@ -5,6 +5,6 @@ module.exports = {
   env: {
     clientId: 50,
     clientSecret: 'd66de12fa3473a93415b02494253f088',
-    accessToken: '070A8D3C121219BC4DED3C70A9C588AC|50-S|202108281805||FFFF',
+    accessToken: 'A852D41D9E2D1FCD06BEA798E7F617DE|50-S|202108301640||FFFF',
   },
 };
